@@ -91,15 +91,15 @@ public class StatisticsGrades {
        static void drawDownDisplay(String[] stringRange){
 
         System.out.println("     +---------+-------+-------+-------+------+");
+        System.out.printf(" ");
         for (String range : stringRange) {
-            System.out.print("  " + range + "  ");
+            System.out.print(" | " + range + "  ");
        }
     }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter the values for the grades separated by spaces");
         String inputValues = sc.nextLine();
-        System.out.println(inputValues);
         List<Integer> vGrades = convertStringInputToArrayzList(inputValues);
         calculateMaxMinAverageScore(vGrades);
         System.out.printf("The maximum grade: "+max +"%nThe minimum grade :"+min + "%nThe average grade :"+ average +"\n");
