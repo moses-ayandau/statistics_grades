@@ -19,10 +19,14 @@ public class StatisticsGrades {
     static List<Integer> convertStringInputToArrayzList(String input){
         List<Integer> grades = new ArrayList<>();
         String[] stringValues = input.split(" ");
+       try {
         for(String v: stringValues){
             grades.add(Integer.valueOf(v));
         }
         
+       } catch (Exception e) {
+        System.out.println("Could not convert to integer arrays. Please check you input and try again!");
+       }
         return grades;
 
     }
