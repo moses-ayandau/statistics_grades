@@ -3,7 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Grades {
+public class StatisticsGrades {
+    /**
+     * class variables declared
+     */
     static  int max =0;
     static  int min =Integer.MAX_VALUE;
     static double average = 0.0;
@@ -12,7 +15,9 @@ public class Grades {
     static int maxBar = 0;
 
 
-    static List<Integer> convertToGradeArrays(String input){
+
+    // Convert the input string of grade enter by the user to ArrayList
+    static List<Integer> convertStringInputToArrayzList(String input){
         List<Integer> grades = new ArrayList<>();
         String[] stringValues = input.split(" ");
         for(String v: stringValues){
@@ -23,7 +28,8 @@ public class Grades {
 
     }
 
-    static void calculateStats(List<Integer> arrayList){
+    //Calculate the maximum, minimum and average score of the grades
+    static void calculateMaxMinAverageScore(List<Integer> arrayList){
         for(Integer grade: arrayList){
             if(grade > max){
                 max = grade;
@@ -36,7 +42,8 @@ public class Grades {
         average = sum/arrayList.size();
     }
 
-    static  int[] gradeRangeArray(List<Integer> arrIntegers){
+    //Get the stat for each range e.g 21-40=4
+    static  int[] getScoreRangeStats(List<Integer> arrIntegers){
         for(int v: arrIntegers){
             if (v >= 81 && v <= 100) {
                 rangeArray[4]++;
@@ -52,6 +59,7 @@ public class Grades {
         }
         return rangeArray;
     }
+        //Get the maximum range value that will be used to draw the graph
        static int returnMaxBarToBeDrawn(int[] stats){
         for (int count : stats) {
             if (count > maxBar) {
@@ -60,9 +68,10 @@ public class Grades {
         }
         return maxBar;
        }
+       // Draw bar graph patten depending on the maximum range value
        static void drawBarPattern(int[] statRange, int max){
         for (int row = max; row > 0; row--) {
-            System.out.print(row+"   \t");
+            System.out.print(row+">   \t");
             for (int i = 0; i < statRange.length; i++) {
                 if (statRange[i] >= row) {
                     System.out.print("#######\t");
@@ -73,6 +82,7 @@ public class Grades {
             System.out.println();
         }
        }
+       //Draw a patten beneath the graph
        static void drawDownDisplay(String[] stringRange){
 
         System.out.println("     +---------+-------+-------+-------+------+");
@@ -85,17 +95,18 @@ public class Grades {
         System.out.println("Please enter the values for the grades separated by spaces");
         String inputValues = sc.nextLine();
         System.out.println(inputValues);
-        List<Integer> vGrades = convertToGradeArrays(inputValues);
+        List<Integer> vGrades = convertStringInputToArrayzList(inputValues);
         System.out.println(vGrades);
-        calculateStats(vGrades);
+        calculateMaxMinAverageScore(vGrades);
         System.out.printf("Max: "+max +"%nMin :"+min + "%nAverage :"+ average +"\n");
         String[] ranges = {"0-20", "21-40", "41-60", "61-80", "81-100"};
         
-        int[] returnedArrayRange =  gradeRangeArray(vGrades);
+        int[] returnedArrayRange =  getScoreRangeStats(vGrades);
         int maxValueBar = returnMaxBarToBeDrawn(returnedArrayRange);
         System.out.println("Display of the graph");
         drawBarPattern(returnedArrayRange, maxValueBar);
         drawDownDisplay(ranges);
+        sc.close();
 
     }
 }
