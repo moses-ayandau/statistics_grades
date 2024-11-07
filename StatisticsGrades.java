@@ -11,7 +11,6 @@ public class StatisticsGrades {
     static  int min =Integer.MAX_VALUE;
     static double average = 0.0;
     static int sum = 0;
-    static int[] rangeArray = new int[5];
     static int maxBar = 0;
 
 
@@ -21,7 +20,7 @@ public class StatisticsGrades {
         List<Integer> grades = new ArrayList<>();
         String[] stringValues = input.split(" ");
         for(String v: stringValues){
-            grades.add(Integer.parseInt(v));
+            grades.add(Integer.valueOf(v));
         }
         
         return grades;
@@ -44,16 +43,18 @@ public class StatisticsGrades {
 
     //Get the stat for each range e.g 21-40=4
     static  int[] getScoreRangeStats(List<Integer> arrIntegers){
+        int[] rangeArray = new int[5];
+
         for(int v: arrIntegers){
             if (v >= 81 && v <= 100) {
                 rangeArray[4]++;
-            } else if (v >= 61 && v <= 80) {
+            } else if (v >= 61) {
                 rangeArray[3]++;
-            } else if (v >= 41 && v <= 60) {
+            } else if (v >= 41) {
                 rangeArray[2]++;
-            } else if (v >= 21 && v <= 40) {
+            } else if (v >= 21) {
                 rangeArray[1]++;
-            } else if (v >= 0 && v <= 20) {
+            } else if (v >= 0) {
                 rangeArray[0]++;
             }
         }
@@ -96,9 +97,8 @@ public class StatisticsGrades {
         String inputValues = sc.nextLine();
         System.out.println(inputValues);
         List<Integer> vGrades = convertStringInputToArrayzList(inputValues);
-        System.out.println(vGrades);
         calculateMaxMinAverageScore(vGrades);
-        System.out.printf("Max: "+max +"%nMin :"+min + "%nAverage :"+ average +"\n");
+        System.out.printf("The maximum grade: "+max +"%nThe minimum grade :"+min + "%nThe average grade :"+ average +"\n");
         String[] ranges = {"0-20", "21-40", "41-60", "61-80", "81-100"};
         
         int[] returnedArrayRange =  getScoreRangeStats(vGrades);
