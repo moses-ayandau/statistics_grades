@@ -28,11 +28,20 @@ public class StatisticsGrades {
         String[] stringValues = input.split(" ");
        try {
         for(String v: stringValues){
-            grades.add(Integer.valueOf(v));
+            int convertedInteger = Integer.valueOf(v);
+            if(convertedInteger >=0 && convertedInteger <= 100){
+                grades.add(convertedInteger);
+            }
+        }
+    }
+        catch(NumberFormatException e){
+            System.out.println("Please enter only integers");
         }
         
-       } catch (Exception e) {
+        catch (Exception e) {
         System.out.println("Could not convert to integer arrays. Please check you input and try again!");
+        System.out.println(e.getMessage());
+        e.printStackTrace();
        }
         return grades;
 
@@ -96,7 +105,7 @@ public class StatisticsGrades {
          * 3. Draws bar if it meets the condition of a bar
          */
         for (int row = max; row > 0; row--) {
-            System.out.print(row+">   \t");
+            System.out.print(row+" >   \t");
             for (int i = 0; i < statRange.length; i++) {
                 if (statRange[i] >= row) {
                     System.out.print("#######\t");
